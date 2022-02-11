@@ -1,0 +1,4 @@
+export const CREATE_TODO = 'CREATE_TODO';
+export const GET_TODOS = 'GET_TODOS';
+export const REMOVE_TODO = 'REMOVE_TODO';
+export const CHANGE_TODO_COMPLETED = 'CHANGE_TODO_COMPLETED';
