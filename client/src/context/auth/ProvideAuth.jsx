@@ -10,13 +10,14 @@ const ProvideAuth = ({children}) => {
     try {
       setLoading(true);
 
-      const response = await fetch('/api/auth/login', {
+      const response = await fetch('http://localhost:5000/api/auth/login', {
         method: 'POST',
         body: JSON.stringify({email, password}),
         headers: {
           'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        }
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include'
       })
       
       if (response.status === 204) {
@@ -38,7 +39,7 @@ const ProvideAuth = ({children}) => {
     try {
       setLoading(true);
 
-      const response = await fetch('/api/auth/register', {
+      const response = await fetch('http://localhost:5000/api/auth/register', {
         method: 'POST',
         body: JSON.stringify({
           email,
@@ -47,7 +48,8 @@ const ProvideAuth = ({children}) => {
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
-        }
+        },
+        credentials: 'include'
       });
       
       if (response.status === 201) {
@@ -69,7 +71,9 @@ const ProvideAuth = ({children}) => {
     try {
       setLoading(true);
 
-      const response = await fetch('/api/auth/auto-login');
+      const response = await fetch('http://localhost:5000/api/auth/auto-login', {
+        credentials: 'include'
+      });
 
       if (response.status === 204) {
         setIsAuthenticated(true);
@@ -87,7 +91,9 @@ const ProvideAuth = ({children}) => {
     try {
       setLoading(true);
 
-      const response = await fetch('/api/auth/logout');
+      const response = await fetch('http://localhost:5000/api/auth/logout', {
+        credentials: 'include'
+      });
 
       if (response.status === 204) {
         setIsAuthenticated(false);

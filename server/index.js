@@ -3,6 +3,7 @@ const path = require('path');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const MongoStore = require('connect-mongodb-session')(session);
+const cors = require('cors');
 const keys = require('./keys');
 const userMiddleware = require('./middleware/userMiddleware');
 const todoRoutes = require('./routes/todoRoutes');
@@ -16,6 +17,10 @@ const store = new MongoStore({
 });
 
 app.use(express.json());
+app.use(cors({
+  origin: 'http://localhost:3000',
+  credentials:  true
+}));
 app.use(express.static(path.join(__dirname, '..', 'client', 'build')));
 app.use(session({
   secret: keys.SESSION_SECRET,
@@ -28,15 +33,11 @@ app.use(userMiddleware);
 app.use('/api/todo', todoRoutes);
 app.use('/api/auth', authRoutes);
 
-app.use((req, res) => {
-  res.sendFile(path.join(__dirname, '..', 'client', 'build', 'index.html'));
-});
-
 (async () => {
   try {
     await mongoose.connect(keys.MONGODB_URI);
 
-    app.listen(process.env.PORT || 3000, () => {
+    app.listen(process.env.PORT || 5000, () => {
       console.log('Server is running');
     })
   } catch (e) {

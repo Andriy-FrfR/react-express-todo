@@ -13,13 +13,14 @@ const ProvideTodo = (props) => {
 
   const createTodo = async (title) => {
     try {
-      const response = await fetch('/api/todo/create', {
+      const response = await fetch('http://localhost:5000/api/todo/create', {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({title})
+        body: JSON.stringify({title}),
+        credentials: 'include'
       });
 
       if (response.status === 201) {
@@ -38,7 +39,9 @@ const ProvideTodo = (props) => {
 
   const getTodos = async () => {
     try {
-      const response = await fetch('/api/todo/get-todos');
+      const response = await fetch('http://localhost:5000/api/todo/get-todos', {
+        credentials: 'include'
+      });
 
       if (response.status === 200) {
         const todos = await response.json();
@@ -54,8 +57,9 @@ const ProvideTodo = (props) => {
 
   const removeTodo = async (id) => {
     try {
-      const response = await fetch(`/api/todo/remove-todo/${id}`, {
-        method: 'DELETE'
+      const response = await fetch(`http://localhost:5000/api/todo/remove-todo/${id}`, {
+        method: 'DELETE',
+        credentials: 'include'
       });
 
       if (response.status === 204) {
@@ -70,13 +74,14 @@ const ProvideTodo = (props) => {
 
   const changeTodoCompleted = async (id, completed) => {
     try {
-      const response = await fetch(`/api/todo/set-todo-completed/${id}`, {
+      const response = await fetch(`http://localhost:5000/api/todo/set-todo-completed/${id}`, {
         method: 'PATCH',
         body: JSON.stringify({completed}),
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json'
-        }
+        },
+        credentials: 'include'
       });
 
       if (response.status === 204) {
