@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export const useInput = ({label = '', type = 'text', validation, name}) => {
+export const useInput = ({label = '', type = 'text', validation = {}, name}) => {
   const [value, setValue] = useState('');
   const [isValid, setIsValid] = useState(false);
   const [touched, setTouched] = useState(false);

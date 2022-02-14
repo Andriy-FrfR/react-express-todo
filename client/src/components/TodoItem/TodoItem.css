@@ -1,7 +1,14 @@
 .TodoItem {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
   align-items: center;
   border-bottom: 1px solid #eee;
   padding: 10px 20px;
+  word-break: break-all;
+}
+
+.TodoItem .title {
+  max-width: 500px;
+  margin-right: 25px;
 }

@@ -24,7 +24,9 @@ const TodoItem = ({todo}) => {
           </label>
         </p>
       </form>
-      {todo.title}
+      <p className="title">
+        {todo.title}
+      </p>
       {/* eslint-disable-next-line jsx-a11y/anchor-is-valid*/}
       <Button
         className="waves-effect waves-light btn-small red"

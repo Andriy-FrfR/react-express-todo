@@ -12,6 +12,9 @@ export const todoReducer = (state, action) => {
     case CHANGE_TODO_COMPLETED:
       const todos = [...state.todos];
       const idx = todos.findIndex((todo) => todo._id === action.id);
+      if (idx === -1) {
+        return state;
+      }
       const todo = {...todos[idx], completed: action.completed};
       todos[idx] = todo;
       return {...state, todos};

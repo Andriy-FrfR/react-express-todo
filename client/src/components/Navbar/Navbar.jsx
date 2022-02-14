@@ -5,7 +5,7 @@ const Navbar = () => {
     <nav>
       <div className="nav-wrapper">
         <NavLink to="/" className="brand-logo center">React Todo</NavLink>
-        <ul id="nav-mobile" className="right hide-on-med-and-down">
+        <ul id="nav-mobile" className="right">
           <li><NavLink to="/logout">Logout</NavLink></li>
         </ul>
       </div>

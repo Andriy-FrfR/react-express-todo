@@ -1,10 +1,18 @@
 const {Router} = require('express');
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
+const {validationResult} = require('express-validator');
+const {authValidators} = require('../utils/validators');
 const authMiddleware = require('../middleware/authMiddleware');
 const router = Router();
 
-router.post('/login', async (req, res) => {
+router.post('/login', authValidators, async (req, res) => {
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    return res.status(422).json({error: 'Your request didn\'t pass the validation'});
+  }
+
   try {
     const {email, password} = req.body;
     const candidate = await User.findOne({email});
@@ -26,7 +34,13 @@ router.post('/login', async (req, res) => {
   }
 })
 
-router.post('/register', async (req, res) => {
+router.post('/register', authValidators, async (req, res) => {
+  const errors = validationResult(req);
+  
+  if (!errors.isEmpty()) {
+    return res.status(422).json({error: 'Your request didn\'t pass the validation'});
+  }
+
   try {
     const candidate = await User.findOne({
       email: req.body.email
